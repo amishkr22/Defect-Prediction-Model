@@ -1,4 +1,4 @@
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, f1_score
@@ -6,7 +6,7 @@ import joblib
 import pandas as pd
 
 def train_model(data_path='uploaded_data.csv', model_path='models/rf_model.pkl', scaler_path='models/scaler.pkl'):
-    """Train a SVM model and save it."""
+    """Train a Random Classifier model and save it."""
     try:
         # Load data
         data = pd.read_csv(data_path)
@@ -27,7 +27,7 @@ def train_model(data_path='uploaded_data.csv', model_path='models/rf_model.pkl',
         X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.2, random_state=42)
 
         # Train model
-        model = SVC(random_state=42)
+        model = RandomForestClassifier(random_state=42)
         model.fit(X_train, y_train)
 
         # Evaluate model
