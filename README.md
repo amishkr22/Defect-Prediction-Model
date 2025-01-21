@@ -1,36 +1,124 @@
-# Defect Prediction Model
+# Manufacturing Defect Prediction API
 
 ## Overview
-This repository contains the implementation of a Defect Prediction Model. The goal of this project is to predict software defects using machine learning techniques. By analyzing historical data, the model aims to identify patterns that are indicative of potential defects in software.
+This project provides a RESTful API for predicting manufacturing defects using a machine learning model. The API supports uploading a dataset, training the model, and predicting defect status based on manufacturing parameters.
 
 ## Features
-- **Data preprocessing and feature extraction**: Clean and transform raw data into a suitable format for model training.
-- **Model training and evaluation**: Train machine learning models and evaluate their performance using various metrics.
-- **Visualization of results**: Generate visualizations to interpret the model's predictions and performance.
+1. Upload a CSV file containing manufacturing data.
+2. Train a Decision Tree model to predict defect status.
+3. Predict defect status for new input data with confidence scores.
 
-## Installation
-To get started, clone the repository and install the required dependencies:
-```bash
-git clone https://github.com/amishkr22/defect-prediction-model.git
-cd defect-prediction-model
-pip install -r requirements.txt
+## Setup Instructions
+
+### Prerequisites
+- Python 3.8 or above
+- Install required dependencies using `pip`.
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone <https://github.com/amishkr22/Defect-Prediction-Model.git>
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd <project_directory>
+   ```
+
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Start the FastAPI server:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+
+5. Open the API documentation:
+   Navigate to [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) for interactive documentation.
+
+## API Endpoints
+
+### `/upload` - Upload Dataset
+- **Method**: POST
+- **Description**: Upload a CSV file for training.
+- **Request**:
+  - Form-data: `file` (CSV file containing the dataset).
+- **Response**:
+  ```json
+  {
+    "message": "File uploaded successfully"
+  }
+  ```
+
+### `/train` - Train the Model
+- **Method**: POST
+- **Description**: Train the model on the uploaded dataset.
+- **Response**:
+  ```json
+  {
+    "accuracy": 0.84,
+    "f1_score": 0.90,
+    "message": "Model trained successfully"
+  }
+  ```
+
+### `/predict` - Predict Defect Status
+- **Method**: POST
+- **Description**: Predict defect status based on input features.
+- **Request**:
+  - **JSON Body**:
+    ```json
+    {
+      "ProductionVolume": 500,
+      "ProductionCost": 15000,
+      "SupplierQuality": 90,
+      "DefectRate": 2.5,
+      "MaintenanceHours": 10,
+      "EnergyConsumption": 3000,
+      "EnergyEfficiency": 0.3
+    }
+    ```
+- **Response**:
+  ```json
+  {
+    "DefectStatus": "Low",
+    "Confidence": 0.85
+  }
+  ```
+
+## Dependencies
+- `FastAPI`
+- `uvicorn`
+- `scikit-learn`
+- `pandas`
+- `joblib`
+
+## Directory Structure
+```
+Dataset/
+├── manufacturing_defect_dataset.csv          # Dataset used
+models/
+├── rf_model.pkl                              # Prediction model
+├── scaler.pkl                                # Scaling model
+src/
+├── __init__.py                               # Package initializer
+├── data_handler.py                           # Handles data upload and processing
+├── model_trainer.py                          # Model training logic
+├── predictor.py                              # Prediction logic
+├── utils.py                                  # Utility functions
+app.py                                        # FastAPI application entry point
 ```
 
-## Usage
-1. **Prepare your dataset**: Place your dataset in the `data` directory. Ensure the dataset is in a compatible format (e.g., CSV).
-2. **Run the preprocessing script**: This script will clean the data and extract relevant features.
-    ```bash
-    python preprocess.py
-    ```
-3. **Train the model**: Use the preprocessed data to train the machine learning model.
-    ```bash
-    python train.py
-    ```
-4. **Evaluate the model**: Assess the model's performance using the evaluation script.
-    ```bash
-    python evaluate.py
-    ```
-5. **Visualize the results**: Optionally, generate visualizations to better understand the model's predictions.
-    ```bash
-    python visualize.py
-    ```
+## Example Usage
+1. **Upload a dataset**:
+   - Use Postman or cURL to send a CSV file to `/upload`.
+2. **Train the model**:
+   - Call the `/train` endpoint to train the model.
+3. **Make predictions**:
+   - Send a JSON payload to `/predict` with the required input features.
+
+## Deployment
+**Run Locally**:
+   - Start the server using `uvicorn app:app --reload`.
