@@ -11,7 +11,7 @@ This repository contains the implementation of a Defect Prediction Model. The go
 ## Installation
 To get started, clone the repository and install the required dependencies:
 ```bash
-git clone https://github.com/yourusername/defect-prediction-model.git
+git clone https://github.com/amishkr22/defect-prediction-model.git
 cd defect-prediction-model
 pip install -r requirements.txt
 ```
