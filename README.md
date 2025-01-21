@@ -109,6 +109,7 @@ src/
 ├── predictor.py                              # Prediction logic
 ├── utils.py                                  # Utility functions
 app.py                                        # FastAPI application entry point
+requirements.txt
 ```
 
 ## Example Usage
