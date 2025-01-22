@@ -5,7 +5,7 @@ This project provides a RESTful API for predicting manufacturing defects using a
 
 ## Features
 1. Upload a CSV file containing manufacturing data.
-2. Train a Decision Tree model to predict defect status.
+2. Train a Random Classifier model to predict defect status.
 3. Predict defect status for new input data with confidence scores.
 
 ## Setup Instructions
@@ -58,8 +58,8 @@ This project provides a RESTful API for predicting manufacturing defects using a
 - **Response**:
   ```json
   {
-    "accuracy": 0.84,
-    "f1_score": 0.90,
+    "accuracy": 0.88,
+    "f1_score": 0.93,
     "message": "Model trained successfully"
   }
   ```
